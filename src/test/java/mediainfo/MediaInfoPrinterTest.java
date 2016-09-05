@@ -1,7 +1,5 @@
 package mediainfo;
 
-import static org.junit.Assert.fail;
-
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +13,6 @@ import org.junit.runner.RunWith;
 import mockit.Mocked;
 import mockit.StrictExpectations;
 import mockit.integration.junit4.JMockit;
-import mockit.internal.expectations.TestOnlyPhase;
 
 @RunWith(JMockit.class)
 public class MediaInfoPrinterTest {
