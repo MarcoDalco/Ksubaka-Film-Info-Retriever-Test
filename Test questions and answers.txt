@@ -1,0 +1,31 @@
+1. In your opinion, what are the main advantages of using Spring in a webapp context ?
+Short answer: speed and scalability of the development process, and reliability of the framework code in production.
+Long answer: using the Spring Framework helps concentrating on the business logic of the application, providing a functionality for quick development and not reinventing the wheel. Spring has many projects and helps simplifying transaction management, unit-test writing (thanks to patterns like dependency injection and to annotations), cross-team development (providing an MVC model, which helps to parallelise coding), REST service development, mobile graceful page degradation, session management, etc…..
+Spring is also community-driven and so widely used that finding a solution to a technical problem is always quick.
+
+
+2. When would you use automatic testing?
+Short answer: almost always.
+Long answer: I interpret that as “automated testing”. “Automated testing” = “programmatic testing” + “automation”. When would I use testing? Always. When would I automate it and therefore write testing code?
+1 - Whenever it has to be repeated a number of times such that writing the tests, running them and maintaining them takes less than doing it all manually. That is especially true in Continuous Integration.
+2 - To certify what has been tested. A manual tester could theoretically do the same mistakes of a developer in test, and code review of tests is roughly equivalent to an extra set of eyes or a second run of tests by another person, but written tests are repeatable and could be inspected again, which could certify what has actually been tested.
+Basically the only times when I would NOT automate testing is when the code to be tested is a one-off procedure that would not benefit from recording *in code* what has actually been tested.
+
+3.  You just received the root access of your project’s freshly installed Linux box. Describe the main steps you’ll take to run the war on it.
+Not sure what you mean exactly, but I must:
+1 - set up network access and - if it’s more than a temporary box - security (firewall)
+2 - install java
+3 - install the servlet container with any library it requires and make sure it starts at boot with the proper user and rights.
+4 - configure the servlet container for the web application and start the web-app.
+5 - test the web-app started properly (open URL with a browser or curl or wget).
+6 - Reboot and retest.
+
+4. Once deployed, your users start whining about slow pages, timeouts, failed uploads, etc. As a developer, how would you handle this?
+I understand this scenario is where an existing web application has just been updated, therefore the problem is *probably* due to the last deployment. In that scenario I would quickly try using the web application myself, and look at the logs, to get more information. If the fix isn’t obvious and quick, then as an admin/DevOps I would try to make the web-app more responsive again: I could temporarily add servers to the cluster, if the architecture of the web-app, the nature of the problem and the cost allow it. I might roll back the web-app to the previous version, if feasible and relatively quick and safe. Back to my Developer mask, I would look at the application logs again and check the changes in the latest code to find the issue, trying to reproduce it in a test environment.
+Possible causes:
+1. Wrong logging level enabled or logging too much information in the new code.
+2. Data replication/sharding issues.
+3. Inefficient algorithms wasting CPU cycles or memory, sometimes just using more than the CPU cache.
+4. Thread contention and context switching.
+5. Unbalanced network traffic due to session targetting
+6. Hijacking
